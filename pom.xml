@@ -8,6 +8,7 @@
 		<version>2.6.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+
 	<groupId>com.openworld</groupId>
 	<artifactId>mvp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -15,6 +16,7 @@
 	<description>MVP for Smart-Contract of OpenWorld</description>
 	<properties>
 		<java.version>11</java.version>
+		<web3j.version>5.0.0</web3j.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -35,7 +37,13 @@
 		<dependency>
 			<groupId>org.web3j</groupId>
 			<artifactId>core</artifactId>
-			<version>5.0.0</version>
+			<version>${web3j.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.web3j</groupId>
+			<artifactId>contracts</artifactId>
+			<version>${web3j.version}</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
 		<dependency>
