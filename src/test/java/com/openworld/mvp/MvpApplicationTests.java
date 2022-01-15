@@ -50,7 +50,7 @@ class MvpApplicationTests {
     }
 
     @Test
-    public void getInfoFromToken() throws Exception {
+    public void getInfoAndTransferToken() throws Exception {
 
         final String ganachePort = "8545";
         final String localEtherAPI = "http://127.0.0.1:" + ganachePort;
@@ -90,6 +90,12 @@ class MvpApplicationTests {
 
         BigInteger targetWalletBalance1 = javaToken.balanceOf(targetWallet).send();
         System.out.println("secondWalletBalance holderBalance: "+targetWalletBalance1.toString());
+
+       Assertions.assertThat(symbol).isEqualTo("XNXX");
+        Assertions.assertThat(name).isEqualTo("Max Coin");
+        Assertions.assertThat(decimal).isEqualTo("18");
+        Assertions.assertThat(targetWalletBalance1).isGreaterThan(targetWalletBalance);
+
     }
 
 }
