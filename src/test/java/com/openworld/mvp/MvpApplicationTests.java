@@ -7,15 +7,11 @@ import org.web3j.contracts.eip20.generated.ERC20;
 import org.web3j.crypto.Credentials;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.DefaultBlockParameter;
-import org.web3j.protocol.core.methods.request.Transaction;
 import org.web3j.protocol.core.methods.response.EthGetBalance;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.web3j.protocol.http.HttpService;
-import org.web3j.tx.gas.ContractGasProvider;
 import org.web3j.tx.gas.DefaultGasProvider;
-import org.web3j.utils.Numeric;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
@@ -32,12 +28,7 @@ class MvpApplicationTests {
         final String localEtherAPI = "http://127.0.0.1:" + ganachePort;
         final String localEtherWalletAddress = "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1";
         final Web3j client = Web3j.build(new HttpService(localEtherAPI));
-        final EthGetBalance clientResponse =
-                client
-                        .ethGetBalance(localEtherWalletAddress, DefaultBlockParameter.valueOf("latest"))
-                        .sendAsync()
-                        .get(5, TimeUnit.SECONDS);
-
+        final EthGetBalance clientResponse = client.ethGetBalance(localEtherWalletAddress, DefaultBlockParameter.valueOf("latest")).sendAsync().get(5, TimeUnit.SECONDS);
 
         final BigDecimal conversionValue = new BigDecimal(1000000000000000000L);
 
@@ -67,7 +58,6 @@ class MvpApplicationTests {
         final String contractAddress = "0xD17e1233A03aFFB9092D5109179B43d6A8828607";
         ERC20 javaToken = ERC20.load(contractAddress, client, credentials, new DefaultGasProvider());
 
-
         String symbol = javaToken.symbol().send();
         String name = javaToken.name().send();
         BigInteger decimal = javaToken.decimals().send();
@@ -77,21 +67,21 @@ class MvpApplicationTests {
         System.out.println("decimal: " + decimal.intValueExact());
 
         BigInteger holderBalance = javaToken.balanceOf(tokenHolderWallet).send();
-        System.out.println("Tokenholder holderBalance: "+holderBalance.toString());
+        System.out.println("Tokenholder holderBalance: " + holderBalance.toString());
 
         BigInteger targetWalletBalance = javaToken.balanceOf(targetWallet).send();
-        System.out.println("secondWalletBalance holderBalance: "+targetWalletBalance.toString());
+        System.out.println("secondWalletBalance holderBalance: " + targetWalletBalance.toString());
 
         TransactionReceipt receipt = javaToken.transfer(targetWallet, new BigInteger("1")).send();
-        System.out.println("Transaction hash: "+receipt.getTransactionHash());
+        System.out.println("Transaction hash: " + receipt.getTransactionHash());
 
         BigInteger holderBalance1 = javaToken.balanceOf(tokenHolderWallet).send();
-        System.out.println("Tokenholder holderBalance: "+holderBalance1.toString());
+        System.out.println("Tokenholder holderBalance: " + holderBalance1.toString());
 
         BigInteger targetWalletBalance1 = javaToken.balanceOf(targetWallet).send();
-        System.out.println("secondWalletBalance holderBalance: "+targetWalletBalance1.toString());
+        System.out.println("secondWalletBalance holderBalance: " + targetWalletBalance1.toString());
 
-       Assertions.assertThat(symbol).isEqualTo("XNXX");
+        Assertions.assertThat(symbol).isEqualTo("XNXX");
         Assertions.assertThat(name).isEqualTo("Max Coin");
         Assertions.assertThat(decimal).isEqualTo("18");
         Assertions.assertThat(targetWalletBalance1).isGreaterThan(targetWalletBalance);
