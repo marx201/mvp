@@ -1,5 +1,6 @@
 package com.openworld.mvp;
 
+import com.openworld.mvp.api.integration.ganache.TransactionESI;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -86,6 +87,13 @@ class MvpApplicationTests {
         Assertions.assertThat(decimal).isEqualTo("18");
         Assertions.assertThat(targetWalletBalance1).isGreaterThan(targetWalletBalance);
 
+    }
+
+    @Test
+    public void test() throws Exception {
+        TransactionESI esi = new TransactionESI();
+        TransactionReceipt transactionReceipt = esi.transferToken("0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1", 10L);
+        System.out.println(transactionReceipt);
     }
 
 }

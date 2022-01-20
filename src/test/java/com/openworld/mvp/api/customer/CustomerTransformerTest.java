@@ -13,7 +13,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @RunWith(SpringRunner.class)
 public class CustomerTransformerTest {
 
-
     private CustomerTransformer transformer;
 
     @BeforeEach
