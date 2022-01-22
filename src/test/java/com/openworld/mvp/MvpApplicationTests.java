@@ -1,6 +1,6 @@
 package com.openworld.mvp;
 
-import com.openworld.mvp.api.integration.ganache.TransactionESI;
+import com.openworld.mvp.integration.ganache.TransactionESI;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

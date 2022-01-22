@@ -1,10 +1,8 @@
 package com.openworld.mvp.bm.token;
 
-import com.openworld.mvp.api.integration.ganache.TransactionESI;
+import com.openworld.mvp.integration.ganache.TransactionESI;
 import com.openworld.mvp.bm.customer.CustomerService;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 
@@ -23,11 +21,11 @@ public class TokenService {
     }
 
     public TokenBE findByCustomerId(Long id) {
-        return TokenBE.builder().customerBE(customerService.findById(id)).amountSent(100000L).build();
+        return TokenBE.builder().customer(customerService.findById(id)).amount(100000L).build();
     }
 
     public List<TokenBE> findAll() {
-        return List.of(TokenBE.builder().customerBE(customerService.findAll().get(0)).amountSent(100000L).build());
+        return List.of(TokenBE.builder().customer(customerService.findAll().get(0)).amount(100000L).build());
     }
 
     public TransactionReceipt transferToken(final String walletAddress, final Long amount) throws Exception {

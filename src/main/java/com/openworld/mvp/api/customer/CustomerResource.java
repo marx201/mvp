@@ -1,11 +1,9 @@
 package com.openworld.mvp.api.customer;
 
+import com.openworld.mvp.bm.customer.CustomerBE;
 import com.openworld.mvp.bm.customer.CustomerService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +25,12 @@ public class CustomerResource {
     public CustomerDTO getCustomerById(@PathVariable final Long id) {
         return transformer.mapDTO(service.findById(id));
     }
+
+    @PostMapping("/")
+    public CustomerDTO register(@RequestParam("walletAddress") final String walletAddress) {
+        return transformer.mapDTO(service.save(walletAddress));
+    }
+
+
 
 }

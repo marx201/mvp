@@ -11,7 +11,7 @@ public class TokenTransformer {
 
     // TODO map list from customerdto
     public TokenDTO mapDTO(TokenBE tokenBE) {
-        return TokenDTO.builder().amountSent(tokenBE.getAmountSent()).id(tokenBE.getId()).build();
+        return TokenDTO.builder().amountSent(tokenBE.getAmount()).id(tokenBE.getId()).build();
     }
 
     public List<TokenDTO> mapDTOList(List<TokenBE> tokenBEList) {

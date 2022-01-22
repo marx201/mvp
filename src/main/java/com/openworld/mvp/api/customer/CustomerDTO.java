@@ -14,4 +14,5 @@ import lombok.Setter;
 public class CustomerDTO {
     private Long id;
     private String walletAddress;
+    private String secret;
 }

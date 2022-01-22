@@ -1,0 +1,11 @@
+services:
+  db:
+    image: 'postgres:13.1-alpine'
+    environment:
+      - POSTGRES_USER=open
+      - POSTGRES_PASSWORD=world
+      - POSTGRES_DB=openworld-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./openworld-db:/var/lib/postgresql/data

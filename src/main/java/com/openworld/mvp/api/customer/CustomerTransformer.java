@@ -17,6 +17,7 @@ public class CustomerTransformer {
         return CustomerDTO
                 .builder()
                 .walletAddress(customerBE.getWalletAddress())
+                .secret(customerBE.getSecretKey())
                 .id(customerBE.getId()).build();
     }
 
