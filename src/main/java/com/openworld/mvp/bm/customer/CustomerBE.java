@@ -7,6 +7,7 @@ import lombok.*;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -31,10 +32,10 @@ public class CustomerBE {
     private String walletAddress;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    private List<TokenBE> tokens;
+    private List<TokenBE> tokens = new ArrayList<>();
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    private List<RouterBE> routers;
+    private List<RouterBE> routers = new ArrayList<>();
 
     private String secretKey = RandomStringUtils.randomAlphanumeric(4);
 

@@ -15,7 +15,6 @@ public class CustomerResource {
     private final CustomerTransformer transformer;
     private final CustomerService service;
 
-
     @GetMapping("/")
     public List<CustomerDTO> getCustomers() {
         return transformer.mapDTOList(service.findAll());
@@ -30,7 +29,5 @@ public class CustomerResource {
     public CustomerDTO register(@RequestParam("walletAddress") final String walletAddress) {
         return transformer.mapDTO(service.save(walletAddress));
     }
-
-
 
 }

@@ -12,8 +12,6 @@ import java.util.stream.Collectors;
 @Component
 public class RouterTransformer {
 
-    private CustomerTransformer customerTransformer;
-
     public List<RouterDTO> mapDTOList(List<RouterBE> routerBEList) {
         return routerBEList.stream().map(this::mapDTO).collect(Collectors.toList());
     }
@@ -22,10 +20,8 @@ public class RouterTransformer {
         return RouterDTO
                 .builder()
                 .id(routerBE.getId())
-                .customer(customerTransformer.mapDTO(routerBE.getCustomer()))
                 .build();
     }
-
 
 
 }

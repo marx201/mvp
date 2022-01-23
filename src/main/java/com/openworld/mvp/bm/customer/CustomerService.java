@@ -1,5 +1,6 @@
 package com.openworld.mvp.bm.customer;
 
+import com.openworld.mvp.exception.SecretInvalidException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,13 @@ public class CustomerService {
         return CustomerBE.builder().id(id).walletAddress("dummyWalletAddress").build();
     }
 
-    public Optional<CustomerBE> findBySecret(final String secret){
-        return customerRepository.findBySecret(secret);
+    public CustomerBE findBySecret(final String secret) {
+        Optional<CustomerBE> customer = customerRepository.findBySecret(secret);
+
+        if (customer.isEmpty()) {
+            throw new SecretInvalidException("Secret" + secret + " is invalid.");
+        }
+        return customer.get();
     }
 
     public List<CustomerBE> findAll() {

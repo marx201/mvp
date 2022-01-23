@@ -27,7 +27,12 @@ public class RouterBE {
 
     @ManyToOne
     @JoinColumn(
-            name = "customer_id",
-            nullable = false)
+            name = "customer_id")
     private CustomerBE customer;
+
+    private String macAddress;
+
+    private boolean isAlive;
+
+    // todo pre persist last updated, created
 }

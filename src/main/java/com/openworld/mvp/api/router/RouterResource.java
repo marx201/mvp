@@ -16,13 +16,18 @@ public class RouterResource {
     private RouterService service;
 
     @PostMapping("/")
-    public RouterDTO mapRouter(@RequestParam("secret") final String secret) {
-        return transformer.mapDTO(service.save(secret));
+    public RouterDTO mapRouter(@RequestParam("secret") final String secret, @RequestParam("macAddress") final String macAddress) {
+        return transformer.mapDTO(service.mapCustomer(secret, macAddress));
     }
 
-    @PostMapping("/")
-    public RouterDTO activate(@RequestParam("secret") final String secret) {
-        return transformer.mapDTO(service.save(secret));
+    @PostMapping("/activate")
+    public RouterDTO activate(@RequestParam("secret") final String secret, @RequestParam("macAddress") final String macAddress) {
+        return transformer.mapDTO(service.activateRouter(secret, macAddress));
+    }
+
+    @PostMapping("/deactivate")
+    public RouterDTO deactivate(@RequestParam("secret") final String secret, @RequestParam("macAddress") final String macAddress) {
+        return transformer.mapDTO(service.deactivateRouter(secret, macAddress));
     }
 
 }
