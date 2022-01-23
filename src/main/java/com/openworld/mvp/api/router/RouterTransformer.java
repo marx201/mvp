@@ -19,6 +19,8 @@ public class RouterTransformer {
     public RouterDTO mapDTO(final RouterBE routerBE) {
         return RouterDTO
                 .builder()
+                .macAddress(routerBE.getMacAddress())
+                .isAlive(routerBE.isAlive())
                 .id(routerBE.getId())
                 .build();
     }

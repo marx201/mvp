@@ -16,4 +16,8 @@ public class RouterDTO {
     private Long id;
     @JsonIgnore
     private CustomerDTO customer;
+
+    private String macAddress;
+
+    private boolean isAlive;
 }

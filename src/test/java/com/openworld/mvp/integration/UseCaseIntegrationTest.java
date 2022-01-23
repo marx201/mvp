@@ -37,8 +37,10 @@ public class UseCaseIntegrationTest {
         final String walletAddress = "integrationTestWalletAddress";
         CustomerDTO customerDTO = customerUtil.registerCustomer(walletAddress);
         final String customerSecret = customerDTO.getSecret();
-        routerUtil.mapRouterToCustomer(walletAddress, customerSecret);
-        routerUtil.activateRouter(walletAddress, customerSecret);
+        final String macAddress = "00:00:00:00:00:00";
+        routerUtil.mapRouterToCustomer(macAddress, customerSecret);
+        RouterDTO routerDTO = routerUtil.activateRouter(macAddress, customerSecret);
+        Assertions.assertThat(routerDTO.getMacAddress()).isEqualTo(macAddress);
     }
 
 }

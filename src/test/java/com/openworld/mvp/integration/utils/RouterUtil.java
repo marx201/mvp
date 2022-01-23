@@ -22,8 +22,8 @@ public class RouterUtil {
     @Autowired
     private MockMvc mockMvc;
 
-    public RouterDTO mapRouterToCustomer(final String walletAddress, final String secret) throws Exception {
-        final String query = "?walletAddress=" + walletAddress + "&secret=" + secret;
+    public RouterDTO mapRouterToCustomer(final String macAddress, final String secret) throws Exception {
+        final String query = "?macAddress=" + macAddress + "&secret=" + secret;
         final MvcResult createMapRouterToCustomerResult = mockMvc
                 .perform(post("/api/v1/router/" + query)
                         .contentType(MediaType.APPLICATION_JSON))
@@ -32,8 +32,8 @@ public class RouterUtil {
         return objectMapper.readValue(createMapRouterToCustomerResult.getResponse().getContentAsString(), RouterDTO.class);
     }
 
-    public RouterDTO activateRouter(final String walletAddress, final String secret) throws Exception {
-        final String query = "?walletAddress=" + walletAddress + "&secret=" + secret;
+    public RouterDTO activateRouter(final String macAddress, final String secret) throws Exception {
+        final String query = "?macAddress=" + macAddress + "&secret=" + secret;
         final MvcResult createActivateRouterResult = mockMvc
                 .perform(post("/api/v1/router/activate" + query)
                         .contentType(MediaType.APPLICATION_JSON))
