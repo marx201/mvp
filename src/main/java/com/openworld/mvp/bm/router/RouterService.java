@@ -7,6 +7,7 @@ import com.openworld.mvp.exception.RouterNotExistsException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -15,6 +16,7 @@ public class RouterService {
 
     private CustomerService customerService;
     private RouterRepository routerRepository;
+    private AliveTimeStampRepository aliveTimeStampRepository;
 
     public RouterBE mapCustomer(final String secret, final String macAddress) {
         CustomerBE customer = customerService.findBySecret(secret);
@@ -41,7 +43,7 @@ public class RouterService {
         if (!router.isAlive()) {
             throw new RouterInvalidStateException("Router with MAC " + macAddress + " is not running.");
         }
-        router.setAlive(true);
+
         return routerRepository.save(router);
     }
 
@@ -51,5 +53,16 @@ public class RouterService {
             throw new RouterNotExistsException("Router with MAC " + macAddress + " does not exist.");
         }
         return router.get();
+    }
+
+    public RouterBE stillAlive(final String secret, final String macAddress) {
+        CustomerBE customer = customerService.findBySecret(secret);
+        RouterBE router = findByMacAddress(macAddress);
+        final LocalDateTime now = LocalDateTime.now();
+        AliveTimeStampBE aliveTimeStampBE = new AliveTimeStampBE();
+        aliveTimeStampBE.setTimeStamp(now);
+        aliveTimeStampBE.setRouter(router);
+        aliveTimeStampRepository.save(aliveTimeStampBE);
+        return router;
     }
 }

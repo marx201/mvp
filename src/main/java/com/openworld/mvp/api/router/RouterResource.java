@@ -2,10 +2,7 @@ package com.openworld.mvp.api.router;
 
 import com.openworld.mvp.bm.router.RouterService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
@@ -28,6 +25,11 @@ public class RouterResource {
     @PostMapping("/deactivate")
     public RouterDTO deactivate(@RequestParam("secret") final String secret, @RequestParam("macAddress") final String macAddress) {
         return transformer.mapDTO(service.deactivateRouter(secret, macAddress));
+    }
+
+    @GetMapping("/status")
+    public RouterDTO status(@RequestParam("secret") final String secret, @RequestParam("macAddress") final String macAddress) {
+        return transformer.mapDTO(service.stillAlive(secret, macAddress));
     }
 
 }
