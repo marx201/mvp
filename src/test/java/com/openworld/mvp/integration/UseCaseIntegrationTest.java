@@ -1,8 +1,10 @@
 package com.openworld.mvp.integration;
 
+import com.openworld.mvp.api.router.RouterDTO;
 import com.openworld.mvp.integration.utils.CustomerUtil;
 import com.openworld.mvp.integration.utils.RouterUtil;
 import com.openworld.mvp.api.customer.CustomerDTO;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +36,9 @@ public class UseCaseIntegrationTest {
         // Given
         final String walletAddress = "integrationTestWalletAddress";
         CustomerDTO customerDTO = customerUtil.registerCustomer(walletAddress);
-
+        final String customerSecret = customerDTO.getSecret();
+        routerUtil.mapRouterToCustomer(walletAddress, customerSecret);
+        routerUtil.activateRouter(walletAddress, customerSecret);
     }
 
 }
