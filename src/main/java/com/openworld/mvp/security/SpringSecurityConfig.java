@@ -1,5 +1,6 @@
 package com.openworld.mvp.security;
 
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,6 +10,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
 @Configuration
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 

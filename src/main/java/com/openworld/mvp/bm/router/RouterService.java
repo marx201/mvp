@@ -43,6 +43,7 @@ public class RouterService {
         if (!router.isAlive()) {
             throw new RouterInvalidStateException("Router with MAC " + macAddress + " is not running.");
         }
+        router.setAlive(false);
 
         return routerRepository.save(router);
     }
