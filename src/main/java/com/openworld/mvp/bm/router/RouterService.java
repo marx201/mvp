@@ -59,6 +59,9 @@ public class RouterService {
     public RouterBE stillAlive(final String secret, final String macAddress) {
         CustomerBE customer = customerService.findBySecret(secret);
         RouterBE router = findByMacAddress(macAddress);
+        if (!router.isAlive()){
+            throw new RouterInvalidStateException("Router is currently not running. Aliveness probe failed.");
+        }
         final LocalDateTime now = LocalDateTime.now();
         AliveTimeStampBE aliveTimeStampBE = new AliveTimeStampBE();
         aliveTimeStampBE.setTimeStamp(now);
