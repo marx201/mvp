@@ -2,7 +2,7 @@
   <configuration default="false" name="2) BE: REST-API" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
     <module name="mvp" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="com.openworld.mvp.MvpApplication" />
-    <option name="VM_PARAMETERS" value="-Dspring.datasource.url=jdbc:postgresql://localhost:5432/openworld-db -Dspring.datasource.username=open -Dspring.datasource.password=world -Dbackend.host=http://localhost:8080" />
+    <option name="VM_PARAMETERS" value="-Dspring.datasource.url=jdbc:postgresql://localhost:5432/openworld-db -Dspring.datasource.username=open -Dspring.datasource.password=world" />
     <option name="ALTERNATIVE_JRE_PATH" />
     <method v="2">
       <option name="Make" enabled="true" />

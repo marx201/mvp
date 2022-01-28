@@ -3,6 +3,7 @@ package com.openworld.mvp.api.token;
 import com.openworld.mvp.bm.token.TokenBE;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,6 +16,9 @@ public class TokenTransformer {
     }
 
     public List<TokenDTO> mapDTOList(List<TokenBE> tokenBEList) {
-        return tokenBEList.stream().map(this::mapDTO).collect(Collectors.toList());
+        if (tokenBEList != null){
+            return tokenBEList.stream().map(this::mapDTO).collect(Collectors.toList());
+        }
+       return Collections.EMPTY_LIST;
     }
 }

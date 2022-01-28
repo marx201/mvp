@@ -40,14 +40,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                     cors.setAllowedHeaders(List.of("*"));
                     cors.setAllowCredentials(true);
                     return cors;
-                }).and()
-                .csrf()
-                .disable();
-        http
-                .authorizeRequests()
-                .antMatchers("/api/v1/abc/**")
-                .fullyAuthenticated()
-                .and
-                        ().httpBasic();
+                }).and().authorizeRequests()
+                .mvcMatchers("/api/v1/customer/**").hasAuthority("SCOPE_openworldscope")
+                .anyRequest().denyAll()
+                .and()
+                .oauth2ResourceServer()
+                .jwt();
+
     }
 }
