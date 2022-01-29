@@ -2,6 +2,7 @@ package com.openworld.mvp;
 
 import com.openworld.mvp.integration.ganache.TransactionESI;
 import org.assertj.core.api.Assertions;
+import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.web3j.contracts.eip20.generated.ERC20;
@@ -20,6 +21,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+@Ignore
 @SpringBootTest
 class MvpApplicationTests {
 
