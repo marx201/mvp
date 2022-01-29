@@ -28,5 +28,6 @@ jobs:
         restore-keys: ${{ runner.os }}-m2      
 
     - name: Build and test project with Maven
-      run: mvn -B package --file pom.xml
+      run: mvn clean compile package -Dmaven.test.skip=true
+  
       
