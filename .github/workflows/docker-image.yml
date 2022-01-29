@@ -10,7 +10,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 11
@@ -21,6 +20,7 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn clean install -Dmaven.test.skip=true
+      working-directory: mvp
       
     - name: Build & push Docker image
       uses: mr-smithers-excellent/docker-build-push@v5
@@ -39,9 +39,11 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         password: ${{ secrets.SSH_PASSWORD }}
         port: 22
-        source: "target/extra-resources"
+        source: "mvp/target/extra-resources"
         target: "mvp"
         
+        
+  
  
     
 
