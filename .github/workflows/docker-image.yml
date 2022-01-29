@@ -22,12 +22,4 @@ jobs:
     - name: Build with Maven
       run: mvn clean install
 
-    - name: Build & push Docker image
-      uses: dyxmr-smithers-excellent/docker-build-push@v5
-      with:
-        image: dddjavatechie/springboot-images-new
-        tags: latest
-        registry: docker.io
-        dockerfile: dDockerfile
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+
