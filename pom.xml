@@ -139,6 +139,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>openworld-api</finalName>
     </build>
 
 </project>
