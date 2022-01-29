@@ -7,6 +7,11 @@ Requirements
 * Maven
 * Intellj as IDE
 * Ganache
+* Docker
+
+Quick start guide:
+1) docker-compose ./localdeployment/docker-compose.yml -d
+2) Start Backend Run Config
 
 Setup blockchain local
 1) npm install ganache-cli@latest --global
@@ -15,9 +20,6 @@ Setup blockchain local
 3) Check port matches test setup connection
 4) Run Tests by clicking play
 ---
-Use Cases
-1) Receive wallet balance
-
 
 (0) 0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1 (100 ETH)
 (1) 0xFFcf8FDEE72ac11b5c542428B35EEF5769C409f0 (100 ETH)
