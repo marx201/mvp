@@ -19,9 +19,7 @@ jobs:
         distribution: 'adopt'
         cache: maven
     - name: Build with Maven
-      run: mvn clean install -Dmaven.test.skip=true
-      working-directory: mvp
-      
+      run: mvn clean install -Dmaven.test.skip=true      
     - name: Build & push Docker image
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
