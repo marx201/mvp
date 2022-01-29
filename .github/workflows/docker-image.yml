@@ -37,7 +37,7 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         password: ${{ secrets.SSH_PASSWORD }}
         port: 22
-        source: "/home/runner/work/mvp/target/extra-resources"
+        source: "target/extra-resources/docker-compose.yml"
         target: "mvp"
         
         
