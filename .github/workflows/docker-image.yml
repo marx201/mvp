@@ -20,21 +20,13 @@ jobs:
       with:
         java-version: 14
 
-    - name: Build project with Maven
-      run: mvn clean install -PskipTests=true
-      
-  build-and-deploy-back:
-    name: Build and Deploy OpenWorld API + Database and IAM + Database
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v1
+    - name: Cache the Maven packages to speed up build
+      uses: actions/cache@v1
       with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        repository: maxxdev89/openworld
-        dockerfile: Dockerfile
-        tags: latest
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2      
+
+    - name: Build and test project with Maven
+      run: mvn -B package --file pom.xml
+      
