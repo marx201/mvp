@@ -21,10 +21,10 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-@Ignore
+
 @SpringBootTest
 class MvpApplicationTests {
-    @Ignore
+
     @Test
     void getWalletBalance() throws ExecutionException, InterruptedException, TimeoutException {
         final String ganachePort = "8545";
@@ -42,7 +42,7 @@ class MvpApplicationTests {
         System.out.println("Scaled local wallet balance " + scaledBalance + "ETH");
         Assertions.assertThat(scaledBalance).isEqualTo(new BigDecimal("100.00"));
     }
-    @Ignore
+
     @Test
     public void getInfoAndTransferToken() throws Exception {
 
@@ -90,7 +90,7 @@ class MvpApplicationTests {
         Assertions.assertThat(targetWalletBalance1).isGreaterThan(targetWalletBalance);
 
     }
-    @Ignore
+
     @Test
     public void test() throws Exception {
         TransactionESI esi = new TransactionESI();

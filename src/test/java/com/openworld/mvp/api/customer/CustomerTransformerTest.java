@@ -14,13 +14,12 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-@Ignore
+
 @RunWith(SpringRunner.class)
 public class CustomerTransformerTest {
 
     @InjectMocks
     private CustomerTransformer transformer;
-
 
 
     @BeforeEach

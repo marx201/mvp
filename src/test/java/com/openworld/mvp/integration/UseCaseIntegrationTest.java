@@ -17,7 +17,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.transaction.Transactional;
 
 
-@Ignore
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
 // Makes sure all tests which opens transcation get rolled back after run
