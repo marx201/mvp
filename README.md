@@ -9,9 +9,23 @@ Requirements
 * Ganache
 * Docker
 
-Quick start guide:
+##Quick start guide:
 1) docker-compose ./localdeployment/docker-compose.yml -d
 2) Start Backend Run Config
+Access:
+IAM-ADMIN: admin / test (use this if you want to go into IAM)
+IAM-USER: maxx / test (use this in frontend login)
+
+##Environments (local):
+* IAM: http://localhost:8080
+* API: http://localhost:8081
+* API-Endpoints: http://localhost:8081/api/v1/
+* PATHS: customer, token, router, status
+* Frontend: http://localhost:4200
+
+
+* Example: Accessing customers 
+http://localhost:8081/api/v1/customer/
 
 Setup blockchain local
 1) npm install ganache-cli@latest --global
