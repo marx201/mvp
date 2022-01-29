@@ -5,6 +5,7 @@ import com.openworld.mvp.integration.utils.CustomerUtil;
 import com.openworld.mvp.integration.utils.RouterUtil;
 import com.openworld.mvp.api.customer.CustomerDTO;
 import org.assertj.core.api.Assertions;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.transaction.Transactional;
 
 
+@Ignore
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
 // Makes sure all tests which opens transcation get rolled back after run
