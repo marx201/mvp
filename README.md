@@ -9,9 +9,18 @@ Requirements
 * Ganache
 * Docker
 
-##Quick start guide:
-1) docker-compose ./localdeployment/docker-compose.yml -d
-2) Start Backend Run Config (make sure spring.profile.active = dev)
+##Local Deployment:
+1) cd ./localdeployment
+2) docker-compose up -d
+3) cd ./mvp
+4) mvn spring-boot:run -Dspring-boot.run.profiles=dev
+
+##Prod Deployment:
+1) Push to master -> this will trigger
+build application and push image to docker hub (maxdev89/openworld:latest)
+2) If ./proddeployment has changed scp docker-compose.yml to host
+3) Else: docker-compose up -d on dev.worknlife.de
+
 Access:
 IAM-ADMIN: admin / test (use this if you want to go into IAM)
 IAM-USER: maxx / test (use this in frontend login)
@@ -21,7 +30,12 @@ IAM-USER: maxx / test (use this in frontend login)
 * API: http://localhost:8081
 * API-Endpoints: http://localhost:8081/api/v1/
 * PATHS: customer, token, router, status
-* Frontend: http://localhost:4200
+
+##Environments (prod):
+* IAM: http://localhost:8080/auth
+* API: http://localhost:8081/swagger-ui.html
+* API-Endpoints: http://localhost:8081/api/v1/
+* PATHS: customer, token, router, status
 
 
 * Example: Accessing customers 

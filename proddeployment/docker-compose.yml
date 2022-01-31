@@ -11,7 +11,7 @@ volumes:
 services:
   openworld-api:
     container_name: openworld-api
-    image: 'maxx89/openworld:latest'
+    image: 'maxdev89/openworld:latest'
     ports:
       - "8081:8081"
     environment:
