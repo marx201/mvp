@@ -9,12 +9,14 @@ volumes:
     driver: local
 
 services:
-  db:
+  openworld-db:
     image: 'postgres:13.1-alpine'
+    container_name: openworld-db
     environment:
       - POSTGRES_USER=open
       - POSTGRES_PASSWORD=world
       - POSTGRES_DB=openworld-db
+      - POSTGRES_PORT=5444
     ports:
       - "5432:5432"
     volumes:
@@ -22,6 +24,7 @@ services:
 
   postgres:
     image: postgres
+    container_name: iam-db
     volumes:
       - postgres_data:/var/lib/postgresql/data
     environment:
@@ -29,6 +32,7 @@ services:
       POSTGRES_USER: keycloak
       POSTGRES_PASSWORD: password
   keycloak:
+    container_name: iam
     image: quay.io/keycloak/keycloak:latest
     environment:
       DB_VENDOR: POSTGRES
@@ -39,8 +43,6 @@ services:
       DB_PASSWORD: password
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: Pa55w0rd
-      # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
-      #JDBC_PARAMS: "ssl=true"
     ports:
       - 8080:8080
     depends_on:

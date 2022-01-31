@@ -11,7 +11,7 @@ Requirements
 
 ##Quick start guide:
 1) docker-compose ./localdeployment/docker-compose.yml -d
-2) Start Backend Run Config
+2) Start Backend Run Config (make sure spring.profile.active = dev)
 Access:
 IAM-ADMIN: admin / test (use this if you want to go into IAM)
 IAM-USER: maxx / test (use this in frontend login)

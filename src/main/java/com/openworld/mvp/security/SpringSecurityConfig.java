@@ -16,6 +16,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private Environment env;
 
+    private static final String[] AUTH_WHITELIST = {
+            "/swagger-resources/**",
+            "/swagger-ui.html",
+            "/v2/api-docs",
+            "/webjars/**"
+    };
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         String localOriginFrontend = env.getProperty("local.origin.frontend");
@@ -41,6 +47,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                     cors.setAllowCredentials(true);
                     return cors;
                 }).and().authorizeRequests()
+                .antMatchers(AUTH_WHITELIST)
+                .permitAll()
                 .mvcMatchers("/api/v1/**").hasAuthority("SCOPE_openworldscope")
                 .anyRequest().denyAll()
                 .and()
