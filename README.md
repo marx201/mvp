@@ -3,7 +3,7 @@
 
 ---
 Requirements
-* Java 17
+* Java 11
 * Maven
 * Intellj as IDE
 * Ganache
