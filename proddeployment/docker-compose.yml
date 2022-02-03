@@ -1,23 +1,77 @@
-
-
-
-
 version: '3'
 
-volumes:
-  postgres_data:
-    driver: local
-
 services:
+  reverse-proxy:
+    container_name: traefik
+    # The official v2 Traefik docker image
+    image: traefik:v2.5
+    # Enables the web UI and tells Traefik to listen to docker
+    command:
+      #- "--log.level=DEBUG"
+      - "--api.insecure=false"
+      - "--accesslog=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.http.address=:80"
+      - "--serversTransport.insecureSkipVerify=true"
+      - "--entrypoints.http.http.redirections.entryPoint.to=https"
+      - "--entrypoints.http.http.redirections.entryPoint.scheme=https"
+      - "--entrypoints.http.http.redirections.entrypoint.permanent=true"
+      - "--entrypoints.https.address=:443"
+      #      - "--entrypoints.https.tls.certificates.certFile=/certs/cert.pem"
+      #      - "--entrypoints.https.tls.certificates.keyFile=/certs/privkey.pem"
+
+      - "--certificatesresolvers.backend-resolver.acme.httpchallenge=true"
+      - "--certificatesresolvers.backend-resolver.acme.httpchallenge.entrypoint=http"
+      #- "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+      - "--certificatesresolvers.backend-resolver.acme.email=sezgin.bingoel@worknlife.de"
+      - "--certificatesresolvers.backend-resolver.acme.storage=/letsencrypt/acme-backend.json"
+
+      - "--certificatesresolvers.iam-resolver.acme.httpchallenge=true"
+      - "--certificatesresolvers.iam-resolver.acme.httpchallenge.entrypoint=http"
+      #- "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+      - "--certificatesresolvers.iam-resolver.acme.email=sezgin.bingoel@worknlife.de"
+      - "--certificatesresolvers.iam-resolver.acme.storage=/letsencrypt/acme-iam.json"
+
+    networks:
+      - traefik
+    ports:
+      # The HTTP port
+      - "80:80"
+      #      - "8080:8080"
+      - "443:443"
+    volumes:
+      # So that Traefik can listen to the Docker events
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "./letsencrypt:/letsencrypt"
+      - "./certs/dev.worknlife.de:/certs"
+    labels:
+      - "traefik.docker.network=mvp_traefik"
+
+
   openworld-api:
     container_name: openworld-api
-    image: 'maxdev89/openworld:latest'
+    image: 'maxdev89/openworld'
     ports:
       - "8081:8081"
     environment:
       - "SPRING_PROFILES_ACTIVE=prod"
     depends_on:
       - openworld-db
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.backend.rule=Host(`backend.dev.worknlife.de`)"
+      - "traefik.http.routers.backend.entrypoints=https"
+      - "traefik.http.routers.backend.tls.certresolver=backend-resolver"
+      - "traefik.http.routers.backend.tls=true"
+      # Tell Traefik to use the port 12345 to connect to `my-container`
+      - "traefik.http.services.backend.loadbalancer.server.port=8081"
+      - traefik.docker.network=mvp_traefik
+
+    networks:
+      - traefik
+      - db
+
 
   openworld-db:
     image: 'postgres:13.1-alpine'
@@ -28,22 +82,28 @@ services:
       - POSTGRES_DB=openworld-db
       - POSTGRES_PORT=5444
     ports:
-      - "5432:5432"
+      - "5444:5432"
     volumes:
       - ./openworld-db:/var/lib/postgresql/data
-
+    networks:
+      - db
   postgres:
     image: postgres
     container_name: iam-db
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ./ postgres_data:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: keycloak
       POSTGRES_USER: keycloak
       POSTGRES_PASSWORD: password
+    networks:
+      - db-iam
+      - traefik
   keycloak:
     container_name: iam
     image: quay.io/keycloak/keycloak:latest
+    volumes:
+      - ./imports:/opt/jboss/keycloak/imports
     environment:
       DB_VENDOR: POSTGRES
       DB_ADDR: postgres
@@ -53,7 +113,29 @@ services:
       DB_PASSWORD: password
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: Pa55w0rd
-    ports:
-      - 8080:8080
+      PROXY_ADDRESS_FORWARDING: "true"
+      KEYCLOAK_FRONTEND_URL: https://iam.dev.worknlife.de/auth
+    #      KEYCLOAK_IMPORT=/opt/jboss/keycloak/imports/realm-export.json -D keycloak.profile.feature.upload_scripts=enabled
+    #    ports:
+    #      - 8443:8443
     depends_on:
       - postgres
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.keycloak.rule=Host(`iam.dev.worknlife.de`)"
+      - "traefik.http.routers.keycloak.entrypoints=https"
+      - "traefik.http.routers.keycloak.tls.certresolver=iam-resolver"
+      - "traefik.http.routers.keycloak.tls=true"
+      # Tell Traefik to use the port 12345 to connect to `my-container`
+      - "traefik.http.services.keycloak.loadbalancer.server.port=8080"
+      - traefik.docker.network=mvp_traefik
+
+    networks:
+      - traefik
+      - db-iam
+#      - web
+networks:
+  db:
+  db-iam:
+  web:
+  traefik:
