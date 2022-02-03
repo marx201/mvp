@@ -21,8 +21,8 @@ build application and push image to docker hub (maxdev89/openworld:latest)
 2) If ./proddeployment has changed scp docker-compose.yml to host
 3) Else: docker-compose up -d on dev.worknlife.de
 
-Access:
-IAM-ADMIN: admin / test (use this if you want to go into IAM)
+Access (local)
+IAM-ADMIN: admin / Pa55w0rd (use this if you want to go into IAM)
 IAM-USER: maxx / test (use this in frontend login)
 
 ##Environments (local):
@@ -31,15 +31,19 @@ IAM-USER: maxx / test (use this in frontend login)
 * API-Endpoints: http://localhost:8081/api/v1/
 * PATHS: customer, token, router, status
 
-##Environments (prod):
-* IAM: http://localhost:8080/auth
-* API: http://localhost:8081/swagger-ui.html
-* API-Endpoints: http://localhost:8081/api/v1/
-* PATHS: customer, token, router, status
+Access (prod)
+IAM-ADMIN: admin / Pa55w0rd (use this if you want to go into IAM)
+IAM-USER: maxxrl / test (use this in frontend login)
 
+##Environments (prod):
+* IAM: https://iam.dev.worknlife.de/auth/
+* API: https://backend.dev.worknlife.de/swagger-ui.html
+* API-Endpoints: https://backend.dev.worknlife.de/api/v1/
+* PATHS: customer, token, router, status
 
 * Example: Accessing customers 
 http://localhost:8081/api/v1/customer/
+https://backend.dev.worknlife.de/api/v1/customer/
 
 Setup blockchain local
 1) npm install ganache-cli@latest --global
