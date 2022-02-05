@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -21,10 +22,16 @@ public class CustomerTransformerTest {
     @InjectMocks
     private CustomerTransformer transformer;
 
+    @Mock
+    private TokenTransformer tokenTransformer;
+
+    @Mock
+    private RouterTransformer routerTransformer;
+
 
     @BeforeEach
     void init() {
-        /*transformer = new CustomerTransformer();*/
+        transformer = new CustomerTransformer(routerTransformer, tokenTransformer);
     }
 
     @Test

@@ -34,6 +34,8 @@ public class RouterBE {
 
     private String macAddress;
 
+    private String serialNumber;
+
     private boolean isAlive;
 
     @OneToMany(mappedBy = "router", cascade = CascadeType.ALL)

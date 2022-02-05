@@ -1,13 +1,18 @@
 package com.openworld.mvp.bm.router;
 
+import com.openworld.mvp.api.router.RouterDTO;
 import com.openworld.mvp.bm.customer.CustomerBE;
 import com.openworld.mvp.bm.customer.CustomerService;
 import com.openworld.mvp.exception.RouterInvalidStateException;
 import com.openworld.mvp.exception.RouterNotExistsException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -23,6 +28,10 @@ public class RouterService {
         RouterBE router = findByMacAddress(macAddress);
         router.setCustomer(customer);
         return routerRepository.save(router);
+    }
+
+    public List<RouterBE> findAll() {
+        return routerRepository.findAll();
     }
 
     public RouterBE activateRouter(final String secret, final String macAddress) {
@@ -59,7 +68,7 @@ public class RouterService {
     public RouterBE stillAlive(final String secret, final String macAddress) {
         CustomerBE customer = customerService.findBySecret(secret);
         RouterBE router = findByMacAddress(macAddress);
-        if (!router.isAlive()){
+        if (!router.isAlive()) {
             throw new RouterInvalidStateException("Router is currently not running. Aliveness probe failed.");
         }
         final LocalDateTime now = LocalDateTime.now();
@@ -68,5 +77,10 @@ public class RouterService {
         aliveTimeStampBE.setRouter(router);
         aliveTimeStampRepository.save(aliveTimeStampBE);
         return router;
+    }
+
+    public void saveAll(MultipartFile multipartFile) throws IOException {
+        List<RouterBE> routers = RouterImportCsvHelper.csvToRouters(multipartFile.getInputStream());
+        routerRepository.saveAll(routers);
     }
 }

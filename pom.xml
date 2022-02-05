@@ -103,6 +103,13 @@
             <version>2.9.2</version>
         </dependency>
 
+        <!-- Needed for csv reading and parsing -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-csv</artifactId>
+            <version>1.8</version>
+        </dependency>
+
         <!-- Only test -->
         <dependency>
             <groupId>org.springframework.security</groupId>
