@@ -25,4 +25,5 @@ public class TokenResource {
     public List<TokenDTO> getAllTokens() {
         return transformer.mapDTOList(service.findAll());
     }
+
 }

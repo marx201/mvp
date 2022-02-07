@@ -34,6 +34,8 @@ public class RouterService {
         return routerRepository.findAll();
     }
 
+    public RouterBE findById(Long id) {return RouterBE.builder().id(id).build();}
+
     public RouterBE activateRouter(final String secret, final String macAddress) {
         // Customer is only there for validation (TODO)
         CustomerBE customer = customerService.findBySecret(secret);

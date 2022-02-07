@@ -1,6 +1,7 @@
 package com.openworld.mvp.bm.router;
 
 import com.openworld.mvp.bm.customer.CustomerBE;
+import com.openworld.mvp.bm.localwallet.LocalWalletBE;
 import lombok.*;
 
 import javax.persistence.*;
@@ -41,5 +42,8 @@ public class RouterBE {
     @OneToMany(mappedBy = "router", cascade = CascadeType.ALL)
     private List<AliveTimeStampBE> aliveTimeStamp;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "localwallet_id", referencedColumnName = "id")
+    private LocalWalletBE localWalletBe;
     // todo pre persist last updated, created
 }
