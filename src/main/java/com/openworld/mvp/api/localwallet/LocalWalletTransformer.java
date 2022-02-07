@@ -1,10 +1,11 @@
 package com.openworld.mvp.api.localwallet;
 
 import com.openworld.mvp.bm.localwallet.LocalWalletBE;
-import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
-@AllArgsConstructor
+
+@NoArgsConstructor
 @Component
 public class LocalWalletTransformer {
 

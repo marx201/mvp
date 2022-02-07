@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/local-transaction")
 public class LocalTransactionResource {
+
     private final LocalTransactionTransformer transformer;
     private final LocalTransactionService service;
 
     @PostMapping("/")
     public LocalTransactionDTO createTransaction(@RequestParam("amount") final Long amount, @RequestParam("type") final LocalTransactionType type, @RequestParam("local-wallet-id") final Long localWalletId) {
-       // return transformer.mapDTO(service.);
+        // return transformer.mapDTO(service.);
         return null;
     }
+
 }

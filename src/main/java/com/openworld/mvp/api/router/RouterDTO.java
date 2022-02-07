@@ -2,7 +2,6 @@ package com.openworld.mvp.api.router;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.openworld.mvp.api.customer.CustomerDTO;
-import com.openworld.mvp.bm.customer.CustomerBE;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
