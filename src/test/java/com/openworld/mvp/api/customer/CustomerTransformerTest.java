@@ -3,20 +3,19 @@ package com.openworld.mvp.api.customer;
 import com.openworld.mvp.api.router.RouterTransformer;
 import com.openworld.mvp.api.token.TokenTransformer;
 import com.openworld.mvp.bm.customer.CustomerBE;
-import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
-@RunWith(SpringRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class CustomerTransformerTest {
 
     @InjectMocks
@@ -28,11 +27,6 @@ public class CustomerTransformerTest {
     @Mock
     private RouterTransformer routerTransformer;
 
-
-    @BeforeEach
-    void init() {
-        transformer = new CustomerTransformer(routerTransformer, tokenTransformer);
-    }
 
     @Test
     void mapDTOList() {
