@@ -1,4 +1,4 @@
-package com.openworld.mvp.integration.utils;
+package com.openworld.mvp.integration;
 
 import com.openworld.mvp.api.customer.CustomerDTO;
 import com.openworld.mvp.api.router.RouterDTO;

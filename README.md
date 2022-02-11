@@ -20,8 +20,8 @@ Requirements
 
 ## Running integration tests
 1) Do full local deployment
-2) Run all: mvn verify 
-3) Run single: mvn -Dtest=Testname#method verify
+2) Run all: mvn verify -DskipITs=false
+3) Run single: mvn -Dtest=Testname#method verify -DskipITs=false
 
 ##Prod Deployment:
 1) Push to master -> this will trigger

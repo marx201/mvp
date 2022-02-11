@@ -1,4 +1,4 @@
-package com.openworld.mvp.integration.utils;
+package com.openworld.mvp.integration;
 
 import com.openworld.mvp.integration.ganache.TransactionESI;
 import org.assertj.core.api.Assertions;
