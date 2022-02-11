@@ -15,6 +15,14 @@ Requirements
 3) cd ./mvp
 4) mvn spring-boot:run -Dspring-boot.run.profiles=dev
 
+## Running unit tests
+1) mvn test
+
+## Running integration tests
+1) Do full local deployment
+2) Run all: mvn verify 
+3) Run single: mvn -Dtest=Testname#method verify
+
 ##Prod Deployment:
 1) Push to master -> this will trigger
 build application and push image to docker hub (maxdev89/openworld:latest)

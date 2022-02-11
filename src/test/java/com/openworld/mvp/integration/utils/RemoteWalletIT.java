@@ -1,10 +1,9 @@
-package com.openworld.mvp;
+package com.openworld.mvp.integration.utils;
 
 import com.openworld.mvp.integration.ganache.TransactionESI;
 import org.assertj.core.api.Assertions;
-import org.junit.Ignore;
+
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.web3j.contracts.eip20.generated.ERC20;
 import org.web3j.crypto.Credentials;
 import org.web3j.protocol.Web3j;
@@ -21,9 +20,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-
-@SpringBootTest
-class MvpApplicationTests {
+class RemoteWalletIT {
 
     @Test
     void getWalletBalance() throws ExecutionException, InterruptedException, TimeoutException {
