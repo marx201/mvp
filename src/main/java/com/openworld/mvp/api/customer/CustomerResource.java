@@ -17,7 +17,6 @@ public class CustomerResource {
     private final CustomerService service;
 
     @GetMapping("/")
-    @PreAuthorize("hasAuthority('SCOPE_read_access')")
     public List<CustomerDTO> getCustomers() {
         return transformer.mapDTOList(service.findAll());
     }

@@ -85,3 +85,6 @@ Private Keys
 (8) 0x829e924fdf021ba3dbbc4225edfece9aca04b929d6e75613329ca6f1d31c0bb4
 (9) 0xb0057716d5917badaf911b193b12b910811c1497b5bada8d7711f758981c3773
 
+## Keycloak
+1) Get endpoints
+http://localhost:8080/auth/realms/openworld/.well-known/openid-configuration
