@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "local.origin.frontend",
+      "type": "java.lang.String",
+      "description": "Description for local.origin.frontend."
+  }
+] }
