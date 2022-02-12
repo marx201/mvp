@@ -3,6 +3,7 @@ package com.openworld.mvp.api.customer;
 import com.openworld.mvp.bm.customer.CustomerBE;
 import com.openworld.mvp.bm.customer.CustomerService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class CustomerResource {
     private final CustomerService service;
 
     @GetMapping("/")
+    @PreAuthorize("hasAuthority('SCOPE_read_access')")
     public List<CustomerDTO> getCustomers() {
         return transformer.mapDTOList(service.findAll());
     }
