@@ -23,17 +23,14 @@ import java.util.List;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class GlobalSecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
 
+    @Autowired
     private Environment env;
 
     private static final String[] AUTH_WHITELIST = {
             "/swagger-resources/**",
             "/swagger-ui.html",
             "/v2/api-docs",
-            "/spring-security-rest/api/swagger-ui/",
-            "/webjars/**",
-            "/api/v1/swagger-ui",
-            "/mvp/swagger-ui",
-            "swagger-ui.html"
+            "/webjars/**"
     };
 
     @Override
@@ -43,10 +40,9 @@ public class GlobalSecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        String localOriginFrontend ="http://localhost:4200";
-        String remoteOriginFrontend ="";
-/*        String localOriginFrontend = env.getProperty("local.origin.frontend");
-        String remoteOriginFrontend = env.getProperty("remote.origin.frontend");*/
+
+        String localOriginFrontend = env.getProperty("local.origin.frontend");
+        String remoteOriginFrontend = env.getProperty("remote.origin.frontend");
 
         List<String> origins = new ArrayList<>();
 
@@ -80,10 +76,6 @@ public class GlobalSecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
 
     }
 
-    /*
-     * re-configure Spring Security to use
-     * registers the KeycloakAuthenticationProvider with the authentication manager
-     */
     @Autowired
     void configureGlobal(AuthenticationManagerBuilder auth) {
         KeycloakAuthenticationProvider provider = keycloakAuthenticationProvider();

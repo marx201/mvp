@@ -65,18 +65,10 @@ public class OpenApiSecurityConfig implements WebMvcConfigurer {
                 .build();
     }
 
-/*
-    private SecurityScheme oAuth() {
-        return new OAuth("petstore_auth", List.of(new AuthorizationScope("openworldscope", "openworldscope")),
-                List.<GrantType>of(new ImplicitGrant(new LoginEndpoint("http://localhost:8080/auth/realms/openworld/protocol/openid-connect/auth"), "tokenName")));
-
-    }
-*/
-
 
     private AuthorizationScope[] scopes() {
         AuthorizationScope[] scopes = {
-                new AuthorizationScope("openworldscope", "for read operations")};
+                new AuthorizationScope("openworldscope", "for read/ write operations")};
         return scopes;
     }
 

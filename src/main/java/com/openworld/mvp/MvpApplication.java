@@ -7,8 +7,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 @EnableWebSecurity
 @SpringBootApplication
@@ -33,12 +31,5 @@ public class MvpApplication {
 
         };
     }
-
- /*   @Bean
-    public Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .select().apis(RequestHandlerSelectors.basePackage("com.openworld.mvp.api"))
-                .paths(regex("/api/v1.*")).build();
-    }*/
 
 }
